@@ -1,0 +1,15 @@
+node_modules
+dist
+out-tsc
+.angular
+coverage
+.git
+.gitignore
+.vscode
+.idea
+.claude
+prompts
+*.log
+Dockerfile
+docker-compose*.yml
+.dockerignore

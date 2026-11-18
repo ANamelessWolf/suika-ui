@@ -1,0 +1,11 @@
+# Production-like design guide: docker compose up --build → http://localhost:8080
+# Dev server with hot reload:    docker compose -f docker-compose.dev.yml up --build → http://localhost:4242
+services:
+  design-guide:
+    build:
+      context: .
+      target: runtime
+    image: suika-ui/design-guide:latest
+    ports:
+      - '8080:80'
+    restart: unless-stopped

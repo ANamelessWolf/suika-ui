@@ -1,0 +1,7 @@
+// Suika UI — public Sass API.
+//
+// Consumers:   @use 'suika-ui/styles' as sui;
+// Design guide: @use '<relative path>/projects/suika-ui/src/styles' as sui;
+
+@forward 'theme';
+@forward 'layout';

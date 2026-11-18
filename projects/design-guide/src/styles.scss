@@ -1,0 +1,86 @@
+@use '@angular/material' as mat;
+// The design guide consumes the library source directly. Consumers use: @use 'suika-ui/styles' as sui;
+@use '../../suika-ui/src/styles' as sui;
+
+html {
+  color-scheme: light dark;
+  @include sui.theme(
+    $typography: (
+      plain-family: 'Inter, Roboto, sans-serif',
+      brand-family: 'Inter, Roboto, sans-serif',
+      bold-weight: 700,
+      medium-weight: 500,
+      regular-weight: 400,
+    )
+  );
+
+  // Design guide tokens (not part of the library).
+  --dg-radius-lg: 24px;
+  --dg-radius-md: 16px;
+  --dg-radius-sm: 10px;
+  --dg-font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --dg-gradient-brand: linear-gradient(
+    135deg,
+    var(--mat-sys-primary) 0%,
+    color-mix(in oklab, var(--mat-sys-primary), var(--mat-sys-tertiary)) 55%,
+    var(--mat-sys-tertiary) 100%
+  );
+  --dg-shadow-soft: 0 1px 2px color-mix(in srgb, var(--mat-sys-shadow) 8%, transparent),
+    0 8px 24px color-mix(in srgb, var(--mat-sys-shadow) 8%, transparent);
+  --dg-max-content: 1120px;
+}
+
+html.dg-light {
+  color-scheme: light;
+}
+
+html.dg-dark {
+  color-scheme: dark;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font: var(--mat-sys-body-large);
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--mat-sys-primary);
+}
+
+code,
+pre {
+  font-family: var(--dg-font-mono);
+}
+
+:not(pre) > code {
+  padding: 0.1em 0.4em;
+  border-radius: 6px;
+  background: var(--mat-sys-surface-container-high);
+  font-size: 0.9em;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 180ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

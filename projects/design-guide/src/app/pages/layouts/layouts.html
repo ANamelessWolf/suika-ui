@@ -1,0 +1,49 @@
+<dg-doc-page
+  eyebrow="Foundations"
+  title="Device layouts"
+  description="Every Suika UI component is designed and reviewed for five device layouts. The layout is resolved with signals, from the viewport or from any container marked with suiLayoutHost."
+>
+  <dg-doc-section title="The five layouts" anchor="layouts">
+    <div class="devices">
+      @for (device of devices; track device.id) {
+        <article class="device">
+          <span class="device__icon"><mat-icon>{{ device.icon }}</mat-icon></span>
+          <h3>{{ device.label }}</h3>
+          <code>{{ device.id }}</code>
+          <p>Reference {{ device.width }} × {{ device.height }}</p>
+        </article>
+      }
+    </div>
+  </dg-doc-section>
+
+  <dg-doc-section
+    title="Resolution rules"
+    anchor="rules"
+    description="Layouts are resolved from size, not user agent, so a desktop window snapped to a quarter of the screen gets a layout designed for that space. Thresholds can be changed with provideSuikaUi()."
+  >
+    <ol class="rules">
+      <li>Width below <code>{{ t.mobilePortraitMaxWidth }}px</code> → <code>mobile-portrait</code></li>
+      <li>
+        Landscape, height below <code>{{ t.mobileLandscapeMaxHeight }}px</code>, and a touch pointer or width below
+        <code>{{ t.mobileLandscapeMaxWidth }}px</code> → <code>mobile-landscape</code>
+      </li>
+      <li>Width of at least <code>{{ t.desktopLandscapeMinWidth }}px</code> → <code>desktop-landscape</code></li>
+      <li>Height of at least <code>{{ t.desktopHalfMinHeight }}px</code> → <code>desktop-half</code></li>
+      <li>Otherwise → <code>desktop-quarter</code></li>
+    </ol>
+  </dg-doc-section>
+
+  <dg-doc-section title="Live preview" anchor="preview">
+    <dg-example
+      title="Layout-aware component"
+      description="The inspector below injects the layout context and restyles itself per layout. Each frame is a suiLayoutHost."
+      [snippets]="snippets"
+    >
+      <ng-template><dg-layout-inspector /></ng-template>
+    </dg-example>
+  </dg-doc-section>
+
+  <dg-doc-section title="API" anchor="api" description="SuiLayoutContext, injected with injectSuiLayout(), and the suiLayoutHost directive.">
+    <dg-api-table [members]="api" label="Layout context API" />
+  </dg-doc-section>
+</dg-doc-page>

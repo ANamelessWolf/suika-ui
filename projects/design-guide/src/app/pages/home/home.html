@@ -1,0 +1,46 @@
+<section class="hero">
+  <div class="hero__glow" aria-hidden="true"></div>
+  <p class="hero__eyebrow">Angular · Material 3 · Signals</p>
+  <h1 class="hero__title">Responsive components that <span>feel right</span> on every screen.</h1>
+  <p class="hero__lead">
+    Suika UI is an Angular component library built on Angular Material. Components resolve their
+    device layout with signals and adapt to desktop and mobile, down to a quarter of a screen.
+  </p>
+  <div class="hero__actions">
+    <a mat-flat-button routerLink="/components">
+      <mat-icon>widgets</mat-icon>
+      Explore components
+    </a>
+    <a mat-stroked-button routerLink="/foundations/layouts">
+      <mat-icon>devices</mat-icon>
+      Device layouts
+    </a>
+  </div>
+</section>
+
+<section class="features" aria-label="Highlights">
+  @for (feature of features; track feature.title) {
+    <article class="feature">
+      <span class="feature__icon"><mat-icon>{{ feature.icon }}</mat-icon></span>
+      <h2>{{ feature.title }}</h2>
+      <p>{{ feature.text }}</p>
+    </article>
+  }
+</section>
+
+<dg-doc-section title="Getting started" anchor="getting-started" description="Install the package, register the providers and apply the theme.">
+  <div class="steps">
+    <div class="step">
+      <span class="step__n">1</span>
+      <dg-code-block [code]="installCode" language="bash" filename="terminal" />
+    </div>
+    <div class="step">
+      <span class="step__n">2</span>
+      <dg-code-block [code]="provideCode" language="ts" filename="app.config.ts" />
+    </div>
+    <div class="step">
+      <span class="step__n">3</span>
+      <dg-code-block [code]="stylesCode" language="scss" filename="styles.scss" />
+    </div>
+  </div>
+</dg-doc-section>

@@ -1,0 +1,17 @@
+# Dev server with hot reload: docker compose -f docker-compose.dev.yml up --build → http://localhost:4242
+services:
+  design-guide-dev:
+    build:
+      context: .
+      target: dev
+    image: suika-ui/design-guide:dev
+    container_name: suika-ui-design-guide-dev
+    ports:
+      - '4242:4200'
+    volumes:
+      - .:/app
+      # Keep the container's Linux node_modules and Angular cache out of the host bind mount.
+      - /app/node_modules
+      - /app/.angular
+    environment:
+      - NG_CLI_ANALYTICS=false

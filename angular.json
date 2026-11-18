@@ -1,0 +1,107 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "cli": {
+    "packageManager": "npm"
+  },
+  "newProjectRoot": "projects",
+  "projects": {
+    "suika-ui": {
+      "projectType": "library",
+      "root": "projects/suika-ui",
+      "sourceRoot": "projects/suika-ui/src",
+      "prefix": "sui",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/suika-ui/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/suika-ui/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/suika-ui/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "design-guide": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/design-guide",
+      "sourceRoot": "projects/design-guide/src",
+      "prefix": "dg",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/design-guide/src/main.ts",
+            "tsConfig": "projects/design-guide/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/design-guide/public"
+              }
+            ],
+            "styles": [
+              "projects/design-guide/src/styles.scss"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "1MB",
+                  "maximumError": "2MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "8kB",
+                  "maximumError": "16kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "design-guide:build:production"
+            },
+            "development": {
+              "buildTarget": "design-guide:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/design-guide/tsconfig.spec.json"
+          }
+        }
+      }
+    }
+  }
+}

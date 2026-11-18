@@ -1,0 +1,44 @@
+@use 'sass:list';
+
+// Device layout ids. Keep in sync with `SuiDeviceLayout` in
+// `lib/core/layout/device-layout.model.ts`.
+$layouts: (desktop-landscape, desktop-half, desktop-quarter, mobile-landscape, mobile-portrait);
+$desktop-layouts: (desktop-landscape, desktop-half, desktop-quarter);
+$mobile-layouts: (mobile-landscape, mobile-portrait);
+
+// Scopes styles to one or more device layouts inside a component stylesheet.
+//
+// The component must bind its resolved layout on the host:
+//   host: { '[attr.data-sui-layout]': 'layout.layout()' }
+//
+// Usage (component .scss):
+//   @include sui.layout(mobile-portrait, mobile-landscape) {
+//     .actions { flex-direction: column; }
+//   }
+//
+// Styles are keyed on the component's own host attribute (not on ancestors), so nested
+// `[suiLayoutHost]` scopes never conflict.
+@mixin layout($names...) {
+  $selectors: ();
+  @each $name in $names {
+    @if not list.index($layouts, $name) {
+      @error 'Unknown Suika UI layout "#{$name}". Expected one of: #{$layouts}';
+    }
+    $selectors: list.append($selectors, ':host([data-sui-layout="#{$name}"])', $separator: comma);
+  }
+  #{$selectors} {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @include layout($desktop-layouts...) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @include layout($mobile-layouts...) {
+    @content;
+  }
+}

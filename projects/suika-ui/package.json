@@ -1,0 +1,29 @@
+{
+  "name": "suika-ui",
+  "version": "0.0.1",
+  "description": "Responsive, signal-based Angular UI components built on Angular Material, with first-class support for desktop and mobile device layouts.",
+  "keywords": [
+    "angular",
+    "angular-material",
+    "ui",
+    "components",
+    "signals",
+    "responsive"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/cdk": "^21.2.0",
+    "@angular/common": "^21.2.0",
+    "@angular/core": "^21.2.0",
+    "@angular/material": "^21.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "exports": {
+    "./styles": {
+      "sass": "./styles/_index.scss"
+    }
+  },
+  "sideEffects": false
+}

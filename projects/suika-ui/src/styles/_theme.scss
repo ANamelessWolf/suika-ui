@@ -1,0 +1,28 @@
+@use '@angular/material' as mat;
+
+// Applies the Angular Material (M3) system tokens with Suika UI defaults.
+// Include it once, on `html`, together with `color-scheme` to enable light/dark:
+//
+//   html {
+//     color-scheme: light dark;
+//     @include sui.theme();
+//   }
+//
+// Component styles must only consume `--mat-sys-*` tokens so they follow any theme.
+@mixin theme(
+  $primary: mat.$green-palette,
+  $tertiary: mat.$rose-palette,
+  $typography: Roboto,
+  $density: 0
+) {
+  @include mat.theme(
+    (
+      color: (
+        primary: $primary,
+        tertiary: $tertiary,
+      ),
+      typography: $typography,
+      density: $density,
+    )
+  );
+}

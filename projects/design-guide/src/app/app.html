@@ -1,0 +1,67 @@
+<mat-sidenav-container class="shell">
+  <mat-sidenav
+    #drawer
+    class="nav"
+    [mode]="isWide() ? 'side' : 'over'"
+    [opened]="isWide()"
+    [fixedInViewport]="!isWide()"
+  >
+    <a class="brand" routerLink="/">
+      <span class="brand__logo" aria-hidden="true"></span>
+      <span class="brand__name">Suika <strong>UI</strong></span>
+    </a>
+
+    <nav aria-label="Design guide">
+      @for (group of navGroups; track group.label) {
+        <div class="nav__group">
+          <h2 class="nav__label">{{ group.label }}</h2>
+          @for (item of group.items; track item.link) {
+            <a
+              class="nav__item"
+              [routerLink]="item.link"
+              routerLinkActive="nav__item--active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              ariaCurrentWhenActive="page"
+            >
+              <mat-icon>{{ item.icon }}</mat-icon>
+              <span>{{ item.label }}</span>
+            </a>
+          }
+        </div>
+      }
+    </nav>
+
+    <p class="nav__footer">Built with Angular &amp; Material 3</p>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="content">
+    <header class="topbar">
+      @if (!isWide()) {
+        <button mat-icon-button (click)="drawer.toggle()" aria-label="Open navigation">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <a class="brand brand--compact" routerLink="/">
+          <span class="brand__logo" aria-hidden="true"></span>
+          <span class="brand__name">Suika <strong>UI</strong></span>
+        </a>
+      }
+      <span class="topbar__spacer"></span>
+      <span class="topbar__layout" matTooltip="Current viewport layout resolved by suika-ui">
+        <mat-icon>devices</mat-icon>
+        {{ viewport.layout() }}
+      </span>
+      <button
+        mat-icon-button
+        (click)="theme.cycle()"
+        [matTooltip]="'Theme: ' + theme.mode()"
+        [attr.aria-label]="'Switch theme, current: ' + theme.mode()"
+      >
+        <mat-icon>{{ themeIcon() }}</mat-icon>
+      </button>
+    </header>
+
+    <main class="page">
+      <router-outlet />
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

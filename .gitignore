@@ -155,3 +155,25 @@ vite.config.ts.timestamp-*
 .nx/cache
 .nx/workspace-data
 .nx/migrate-runs
+
+# Angular
+/dist
+/tmp
+/out-tsc
+/.angular/cache
+.sass-cache/
+/node_modules
+
+# IDEs and editors
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/mcp.json
+.history/*
+
+# System files
+.DS_Store
+Thumbs.db
